@@ -1,0 +1,12 @@
+{
+  "name": "MBK-617",
+  "displayName": "MBK-617",
+  "expo": {
+    "name": "MBK-617",
+    "slug": "MBK-617",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

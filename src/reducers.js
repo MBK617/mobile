@@ -1,15 +1,22 @@
 /**
- * Combine all reducers in this file and export the combined reducers.
+ * @file Combine all reducers in this file and export the combined reducers.
  */
 
 import { combineReducers } from 'redux';
 
-import globalReducer from './containers/App/reducer';
+import globalReducer from 'containers/App/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
+ * 
+ * @param injectedReducers An object populated with injected child reducers
+ * 
+ * @returns {function} A single reducer function that calls every child reducer
+ * 
+ * @memberof module:Main
+ * 
  */
-export default function createReducer(injectedReducers = {}) {
+function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     global: globalReducer,
     ...injectedReducers,
@@ -17,3 +24,5 @@ export default function createReducer(injectedReducers = {}) {
 
   return rootReducer;
 }
+
+export default createReducer;

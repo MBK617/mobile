@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Counter from '../Counter';
+import { View } from 'react-native';
 
-export default function App() {
+import Counter from 'containers/Counter';
+
+import styles from './styles';
+
+function App() {
   return (
     <View style={styles.container}>
       <Counter/>
@@ -10,11 +13,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

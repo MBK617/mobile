@@ -6,8 +6,15 @@ import invariant from 'invariant';
 
 /**
  * Validate the shape of redux store
+ * 
+ * @param {object} store - A redux store 
+ * 
+ * @returns {void}
+ * 
+ * @memberof module:Utils/Redux
+ * 
  */
-export default function checkStore(store) {
+function checkStore(store) {
   const shape = {
     dispatch: isFunction,
     subscribe: isFunction,
@@ -22,3 +29,5 @@ export default function checkStore(store) {
     '(app/utils...) injectors: Expected a valid redux store',
   );
 }
+
+export default checkStore;

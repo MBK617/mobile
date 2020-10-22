@@ -9,10 +9,14 @@ import getInjectors from './reducerInjectors';
  *
  * @param {string} key A key of the reducer
  * @param {function} reducer A reducer that will be injected
- *
+ * 
+ * @returns {function} A component wrapper
+ * 
+ * @memberof module:Utils/Redux
+ * 
  */
-export default ({ key, reducer }) => WrappedComponent => {
-  class ReducerInjector extends React.Component {
+ const injectReducer = ({ key, reducer }) => WrappedComponent => {
+  class InjectReducer extends React.Component {
     static WrappedComponent = WrappedComponent;
 
     static contextType = ReactReduxContext;
@@ -23,7 +27,6 @@ export default ({ key, reducer }) => WrappedComponent => {
 
     constructor(props, context) {
       super(props, context);
-
       getInjectors(context.store).injectReducer(key, reducer);
     }
 
@@ -32,9 +35,20 @@ export default ({ key, reducer }) => WrappedComponent => {
     }
   }
 
-  return hoistNonReactStatics(ReducerInjector, WrappedComponent);
+  return hoistNonReactStatics(InjectReducer, WrappedComponent);
 };
 
+/**
+ * Hook for dynamically injecting a reducer
+ *
+ * @param {string} key A key of the reducer
+ * @param {function} reducer A reducer that will be injected
+ * 
+ * @returns {void}
+ * 
+ * @memberof module:Utils/Redux
+ * 
+ */
 const useInjectReducer = ({ key, reducer }) => {
   const context = React.useContext(ReactReduxContext);
   React.useEffect(() => {
@@ -43,3 +57,5 @@ const useInjectReducer = ({ key, reducer }) => {
 };
 
 export { useInjectReducer };
+
+export default injectReducer;

@@ -1,9 +1,23 @@
+/**
+ * @file Configure redux store
+ */
+
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import createReducer from './reducers';
 
-export default function configureStore(initialState = {}) {
+/**
+ * Configures and returns initial redux store
+ *
+ * @param {object} initialState The initial state of the application
+ * 
+ * @return {object} A redux store
+ * 
+ * @memberof module:Main
+ *
+ */
+function configureStore(initialState = {}) {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     createReducer(),
@@ -17,3 +31,5 @@ export default function configureStore(initialState = {}) {
 
   return store;
 }
+
+export default configureStore;

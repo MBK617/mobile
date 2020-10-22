@@ -1,5 +1,5 @@
 /**
- * @file Configure redux store
+ * Configure redux store
  */
 
 import { createStore, applyMiddleware } from 'redux';

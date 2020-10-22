@@ -11,6 +11,7 @@
     "excludePattern": "(^|\\/|\\\\)_"
   },
   "opts": {
+    "tutorials": "help",
     "encoding": "utf8",
     "recurse": true,
     "private": false,

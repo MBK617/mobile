@@ -6,7 +6,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "expo start",
-    "docs": "docjs -c docjs.json -R README.md",
+    "docs": "jsdoc -c jsdoc.json -R README.md",
     "test": "jest"
   },
   "dependencies": {

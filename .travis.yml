@@ -3,8 +3,16 @@ language: node_js
 node_js:
   - 14.5.0
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
   - npm run test -- --maxWorkers=4
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $CODE_CLIMATE_ID
 
 before_install:
   - export CHROME_BIN=chromium-browser

@@ -1,14 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import Counter from 'containers/Counter';
-
 import styles from './styles';
+import Login from 'containers/Login';
 
 function App() {
   return (
     <View style={styles.container}>
-      <Counter/>
+      <Login/>
     </View>
   );
 }

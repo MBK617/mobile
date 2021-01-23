@@ -1,25 +1,33 @@
+import { SERVER_HOST, SERVER_PORT } from "@env"
+
+const url = `http://${SERVER_HOST}${SERVER_PORT ? `:${SERVER_PORT}` : ''}`;
 
 function parseJSON(response) {
-  return response.json();
+  return new Promise(async (resolve) => {
+    let body;
+    try {
+      body = await response.json();
+    } catch {
+      body = {};
+    }
+    resolve({status: response.status, body});
+  })
 }
 
 function checkStatus(response) {
-  if (response.status >= 200 && response.status < 300) {
-    if (response.status === 204) {
-      response.json = () => '';
-    }
-    return response;
+  if(response.status >= 200 && response.status < 300) {
+    return response.body;
   }
-
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+  throw new Error(response.body.error);
 }
 
-function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
-    .then(parseJSON);
+function request(path, options) {
+  if(!SERVER_HOST) {
+    console.error('SERVER_HOST environment variable must be set in a .env file at the root level of this repository.');
+  }
+  return fetch(`${url}${path}`, options)
+    .then(parseJSON)
+    .then(checkStatus);
 }
 
 function getRequestOptions(type, payload) {

@@ -8,7 +8,7 @@ export function* makeLoginRequest(action) {
     userPassword: action.password
   }
   try {
-    const result = yield request(`http://localhost:8080/api/public/user/login`, getRequestOptions('post', payload));
+    const result = yield request(`/api/public/user/login`, getRequestOptions('post', payload));
     yield put(logInSuccess(result.token));
   } catch (err) {
     //TODO: get error message and dispatch logInFailure

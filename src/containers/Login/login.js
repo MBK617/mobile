@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { compose } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { Button, Text, View } from 'react-native';
+
 import injectSaga from 'utils/redux/injectSaga';
 import injectReducer from 'utils/redux/injectReducer';
+import Input from 'components/Input';
 
 import styles from './styles';
 import reducer from './reducer';
 import saga from './saga';
-import { Button, Text, TextInput, View } from 'react-native';
 import { logIn } from './actions';
 
 const selectLogin = createSelector(
   state => state.login,
   substate => substate.toJS()
 );
-
-const Input = (props) => {
-  return (
-    <View style={styles.input}>
-      <TextInput {...props} />
-    </View>
-  )
-}
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -36,8 +30,8 @@ const Login = () => {
     <View style={styles.root}>
       <Input value={email} onChangeText={setEmail}/>
       <Input value={password} onChangeText={setPassword}/>
+      <Text style={styles.error}>{errorMessage}</Text>
       <Button title="Log In" onPress={()=>dispatch(logIn(email, password))}/>
-      <Text>{errorMessage}</Text>
     </View>
   );
 }

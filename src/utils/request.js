@@ -1,7 +1,5 @@
 import { SERVER_HOST, SERVER_PORT } from "@env"
 
-const url = `http://${SERVER_HOST}${SERVER_PORT ? `:${SERVER_PORT}` : ''}`;
-
 function parseJSON(response) {
   return new Promise(async (resolve) => {
     let body;
@@ -25,6 +23,7 @@ function request(path, options) {
   if(!SERVER_HOST) {
     console.error('SERVER_HOST environment variable must be set in a .env file at the root level of this repository.');
   }
+  const url = `http://${SERVER_HOST}${SERVER_PORT ? `:${SERVER_PORT}` : ''}`;
   return fetch(`${url}${path}`, options)
     .then(parseJSON)
     .then(checkStatus);

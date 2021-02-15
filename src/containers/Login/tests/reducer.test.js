@@ -1,58 +1,48 @@
 import reducer from '../reducer'
 import { fromJS } from 'immutable';
-import { decrement, increment, incrementAsync, incrementAsyncSuccess } from '../actions'
+import { logIn, logInSuccess, logInFailure } from '../actions'
 
 const initialState = fromJS({
-  value : 0,
-  incrementingAsynchronously: false
+  errorMessage: '',
+  loading: false,
 });
 
 describe('counter reducer', () => {
   
-  // it('should return the initial state', () => {
-  //   expect(reducer(undefined, {})).toEqual(initialState)
-  // })
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(initialState);
+  })
 
-  // it('should handle INCREMENT', () => {
-  //   expect(
-  //     reducer(undefined, increment())
-  //   ).toEqual(initialState.set('value', 1))
-  //   expect(
-  //     reducer(initialState.set('value', 2), increment())
-  //   ).toEqual(initialState.set('value', 3));
-  //   expect(
-  //     reducer(initialState.set('value', -1), increment())
-  //   ).toEqual(initialState.set('value', 0));
-  // })
+  it('should handle LOGIN', () => {
+    expect(
+      reducer(undefined, logIn())
+    ).toEqual(initialState.set('loading', true));
+    expect(
+      reducer(initialState.set('loading', true), logIn())
+    ).toEqual(initialState.set('loading', true));
+    expect(
+      reducer(initialState.set('errorMessage', 'An error occurred.'), logIn())
+    ).toEqual(initialState.set('loading', true));
+  })
 
-  // it('should handle DECREMENT', () => {
-  //   expect(
-  //     reducer(undefined, decrement())
-  //   ).toEqual(initialState.set('value', -1));
-  //   expect(
-  //     reducer(initialState.set('value', 1), decrement())
-  //   ).toEqual(initialState.set('value', 0));
+  it('should handle LOGIN_SUCCESS', () => {
+    expect(
+      reducer(undefined, logInSuccess())
+    ).toEqual(initialState.set('loading', false));
+    expect(
+      reducer(initialState.set('loading', true), logInSuccess())
+    ).toEqual(initialState.set('loading', false));
+  })
 
-  //   expect(
-  //     reducer(initialState.set('value', -1), decrement())
-  //   ).toEqual(initialState.set('value', -2));
-  // })
-
-  // it('should handle INCREMENT_ASYNC', () => {
-  //   expect(
-  //     reducer(undefined, incrementAsync())
-  //   ).toEqual(initialState.set('incrementingAsynchronously', true));
-  //   expect(
-  //     reducer(initialState.set('incrementingAsynchronously', true), incrementAsync())
-  //   ).toEqual(initialState.set('incrementingAsynchronously', true));
-  // })
-
-  // it('should handle INCREMENT_ASYNC_SUCCESS', () => {
-  //   expect(
-  //     reducer(undefined, incrementAsyncSuccess())
-  //   ).toEqual(initialState);
-  //   expect(
-  //     reducer(initialState.set('incrementingAsynchronously', true), incrementAsyncSuccess())
-  //   ).toEqual(initialState);
-  // })
+  it('should handle LOGIN_FAILURE', () => {
+    expect(
+      reducer(undefined, logInFailure('An error occurred.'))
+    ).toEqual(initialState.set('errorMessage', 'An error occurred.'));
+    expect(
+      reducer(initialState.set('loading', true), logInFailure('An error occurred.'))
+    ).toEqual(initialState
+      .set('errorMessage', 'An error occurred.')
+      .set('loading', false)
+    );
+  })
 })

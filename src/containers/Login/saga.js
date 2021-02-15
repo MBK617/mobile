@@ -1,4 +1,4 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest, all, call } from 'redux-saga/effects';
 import { getRequestOptions, request } from "utils/request";
 import { setToken } from "containers/App/actions";
 import { logInSuccess, logInFailure } from "./actions";
@@ -9,7 +9,7 @@ export function* makeLoginRequest(action) {
     userPassword: action.password
   }
   try {
-    const result = yield request(`/api/public/user/login`, getRequestOptions('post', payload));
+    const result = yield call(request, `/api/public/user/login`, getRequestOptions('post', payload));
     yield put(setToken(result.token));
     yield put(logInSuccess());
   } catch (err) {

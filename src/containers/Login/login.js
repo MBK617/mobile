@@ -28,8 +28,8 @@ const Login = () => {
 
   return (
     <View style={styles.root}>
-      <Input value={email} onChangeText={setEmail}/>
-      <Input value={password} onChangeText={setPassword}/>
+      <Input value={email} onChangeText={setEmail} placeholder="Email"/>
+      <Input value={password} onChangeText={setPassword} placeholder="Password"/>
       <Text style={styles.error}>{errorMessage}</Text>
       <Button title="Log In" onPress={()=>dispatch(logIn(email, password))}/>
     </View>

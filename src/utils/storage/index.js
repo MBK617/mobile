@@ -9,5 +9,5 @@ export function setItem(key, value) {
 }
 
 export function deleteItem(key) {
-  return AsyncStorage.setItem(key, null);
+  return AsyncStorage.removeItem(key);
 }

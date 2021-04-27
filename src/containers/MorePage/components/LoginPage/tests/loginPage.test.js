@@ -5,7 +5,7 @@ import { render, cleanup, fireEvent } from '@testing-library/react-native';
 import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 
-import Login from '..';
+import LoginPage from '..';
 
 const initialState = {
   login: fromJS({
@@ -14,7 +14,7 @@ const initialState = {
   })
 };
 
-describe('<Login />', () => {
+describe('<LoginPage />', () => {
   const sagaMiddleware = createSagaMiddleware();
   let store, rendered;
 
@@ -28,7 +28,7 @@ describe('<Login />', () => {
   beforeEach( () => {
     store = mockStore(initialState);
     rendered = render(
-      <Provider store={store}><Login /></Provider>
+      <Provider store={store}><LoginPage /></Provider>
     );
   })
 
@@ -55,7 +55,7 @@ describe('<Login />', () => {
   it('should render error message', () => {
     store = mockStore({ login: initialState.login.set('errorMessage', 'An error occurred') });
     rendered = render(
-      <Provider store={store}><Login /></Provider>
+      <Provider store={store}><LoginPage /></Provider>
     );
     expect(rendered.getByText('An error occurred')).toBeTruthy();
   });

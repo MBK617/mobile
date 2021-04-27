@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Login /> should render correctly 1`] = `
+exports[`<LoginPage /> should render correctly 1`] = `
 <View
   style={
     Object {
+      "height": "100%",
+      "justifyContent": "center",
       "padding": 40,
     }
   }
@@ -49,6 +51,8 @@ exports[`<Login /> should render correctly 1`] = `
       Object {
         "color": "#ff0000",
         "marginBottom": 10,
+        "marginLeft": "auto",
+        "marginRight": "auto",
         "textAlign": "center",
         "width": 250,
       }

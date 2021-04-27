@@ -3,13 +3,14 @@
  */
 
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 import { registerRootComponent } from 'expo';
 
 import App from 'containers/App';
 
 import configureStore from './configureStore'
-
 
 const initialState = {}
 const store = configureStore(initialState)
@@ -22,9 +23,11 @@ const store = configureStore(initialState)
  */
 function Root() {
   return (
-    <Provider store={store}>
-      <App/>
-    </Provider>
+      <ReduxProvider store={store}>
+        <PaperProvider>
+          <App/>
+        </PaperProvider>
+      </ReduxProvider>
   );
 }
 

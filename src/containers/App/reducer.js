@@ -6,8 +6,7 @@ import { fromJS } from 'immutable';
 
 export const initialState = fromJS({
   token: null,
-  history: ['home']
-});
+}).set('history', ['home']);
 
 function appReducer(state = initialState, action) {
   switch (action.type) {

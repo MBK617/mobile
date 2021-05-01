@@ -15,20 +15,20 @@ const MorePage = () => {
   const routes = [
     {
       name: "Log In",
-      key: 'login',
+      path: 'login',
       component: LoginPage,
       icon: 'account-circle',
       show: !isLoggedIn
     },{
       name: "My Profile",
-      key: 'profile',
+      path: 'profile',
       component: ProfilePage,
       icon: 'account-circle',
       show: isLoggedIn
     },
     {
       name: "Settings",
-      key: 'settings', 
+      path: 'settings', 
       component: SettingsPage,
       icon: 'cog',
       show: isLoggedIn
@@ -44,7 +44,7 @@ const MorePage = () => {
   if(path.split('/').length > 1) {
     const localPath = path.split('/')[1]
     for(let route of routes) {
-      if(route.key === localPath && route.show) {
+      if(route.path === localPath && route.show) {
         return React.createElement(route.component);
       }
     }

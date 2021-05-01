@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Navigation /> should render correctly 1`] = `
+<View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 3,
+          "borderColor": "rgba(0, 0, 0, 0.1)",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "marginLeft": 15,
+            }
+          }
+        >
+          Example
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 3,
+          "borderColor": "rgba(0, 0, 0, 0.1)",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "padding": 10,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 18,
+              "marginLeft": 15,
+            }
+          }
+        >
+          External
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

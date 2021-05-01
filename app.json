@@ -5,7 +5,7 @@
     "name": "MBK-617",
     "slug": "MBK-617",
     "version": "1.0.0",
-    "sdkVersion": "39.0.0",
+    "sdkVersion": "40.0.0",
     "platforms": [
       "ios",
       "android",

@@ -23,36 +23,35 @@ import InboxPage from '../InboxPage';
 import MorePage from '../MorePage';
 
 const pages = [
-  { key: 'home', icon: 'home', authenticated: false },
-  { key: 'events', icon: 'calendar', authenticated: true },
-  { key: 'inbox', icon: 'forum', authenticated: true },
-  { key: 'more', icon: 'dots-horizontal', authenticated: false },
+  { path: 'home', key: 'home', icon: 'home', authenticated: false, accessibilityLabel: 'Home' },
+  { path: 'events', key: 'events', icon: 'calendar', authenticated: true, accessibilityLabel: 'Events' },
+  { path: 'inbox', key: 'inbox', icon: 'forum', authenticated: true, accessibilityLabel: 'Inbox' },
+  { path: 'more', key: 'more', icon: 'dots-horizontal', authenticated: false, accessibilityLabel: 'More' },
 ]
 
 const App = () => {
   const isLoggedIn = useLoginStatus();
   const { history, path, goTo, goBack } = useHistory();
-
   const [index, setIndex] = React.useState(0);
   const [routes, setRoutes] = React.useState(pages.filter(({authenticated}) => isLoggedIn || !authenticated).map(({ authenticated, ...page }) => page));
 
   useEffect(() => {
     const newRoutes = pages.filter(({authenticated}) => isLoggedIn || !authenticated).map(({ authenticated, ...page }) => page);
-    setIndex(newRoutes.findIndex(route => route.key === routes[index].key))
+    setIndex(newRoutes.findIndex(route => route.path === routes[index].path))
     setRoutes(newRoutes);
   }, [isLoggedIn])
 
   useEffect(() => {
-    const newPath = routes[index].key;
+    const newPath = routes[index].path;
     goTo(newPath);
   }, [index])
 
   useEffect(() => {
-    const newIndex = routes.findIndex(page => page.key === path?.split('/')[0]);
-    setIndex(newIndex);
+    const newIndex = routes.findIndex(page => page.path === path?.split('/')[0]);
+    if(newIndex !== index) setIndex(newIndex);
   }, [path])
 
-  const renderScene =  () => {
+  const renderScene =  (value) => {
     switch (path?.split('/')[0]) {
       case 'home':
         return <HomePage />;
@@ -71,14 +70,26 @@ const App = () => {
         statusBarHeight={0}
         style={styles.header}
       > 
-        <Appbar.BackAction onPress={goBack} style={{opacity: history.length > 1 ? 1 : 0, transition: '.2s'}}/>
-        <Image source={require('assets/mbklogo.jpg')} style={styles.logo}/>
-        <Appbar.Action icon="bell" />
+        <Appbar.BackAction 
+          onPress={goBack} 
+          disabled={history.length <= 1}
+          style={{opacity: history.length > 1 ? 1 : 0, transition: '.2s'}}
+        />
+        <Image 
+          source={require('assets/mbklogo.jpg')} 
+          style={styles.logo}
+        />
+        <Appbar.Action 
+          onPress={() => {}}
+          icon="bell" 
+          accessibilityLabel="Notifications"
+        />
       </Appbar.Header>
       <BottomNavigation
         barStyle={{ backgroundColor: '#222' }}
         navigationState={{ index, routes }}
         onIndexChange={setIndex}
+        sceneAnimationEnabled={true}
         renderScene={renderScene}
         shifting={false} 
         labeled={false} 

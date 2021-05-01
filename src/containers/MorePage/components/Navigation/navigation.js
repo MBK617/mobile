@@ -24,9 +24,9 @@ const Navigation = ({ routes }) => {
         route.show && 
           <TouchableHighlight 
             underlayColor="rgba(0,0,0,0.1)" 
-            key={route.name} 
+            key={route.name}
             onPress={() => {
-              if(route.key) goTo(`more/${route.key}`);
+              if(route.path) goTo(`more/${route.path}`);
               if(route.external) Linking.canOpenURL(route.external).then(supported => {
                 if(supported) {
                   Linking.openURL(route.external);

@@ -29,14 +29,18 @@ const pages = [
   { path: 'more', key: 'more', icon: 'dots-horizontal', authenticated: false, accessibilityLabel: 'More' },
 ]
 
+const getRoutes = (isLoggedIn) => {
+  return pages.filter(({authenticated}) => isLoggedIn || !authenticated).map(({ authenticated, ...page }) => page);
+}
+
 const App = () => {
   const isLoggedIn = useLoginStatus();
   const { history, path, goTo, goBack } = useHistory();
   const [index, setIndex] = React.useState(0);
-  const [routes, setRoutes] = React.useState(pages.filter(({authenticated}) => isLoggedIn || !authenticated).map(({ authenticated, ...page }) => page));
+  const [routes, setRoutes] = React.useState(getRoutes(isLoggedIn));
 
   useEffect(() => {
-    const newRoutes = pages.filter(({authenticated}) => isLoggedIn || !authenticated).map(({ authenticated, ...page }) => page);
+    const newRoutes = getRoutes(isLoggedIn);
     setIndex(newRoutes.findIndex(route => route.path === routes[index].path))
     setRoutes(newRoutes);
   }, [isLoggedIn])

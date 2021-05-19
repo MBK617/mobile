@@ -1,7 +1,7 @@
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { popHistory, pushHistory } from '../containers/App/actions';
+import { popHistory, pushHistory } from 'containers/App/actions';
 
 const selectApp = createSelector(
   state => state.app,

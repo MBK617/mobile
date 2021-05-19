@@ -55,7 +55,7 @@ const App = () => {
     if(newIndex !== index) setIndex(newIndex);
   }, [path])
 
-  const renderScene =  (value) => {
+  const renderScene = () => {
     switch (path?.split('/')[0]) {
       case 'home':
         return <HomePage />;

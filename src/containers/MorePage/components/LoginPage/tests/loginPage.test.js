@@ -6,6 +6,19 @@ import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 
 import LoginPage from '..';
+import { logIn, logInFailure, logInSuccess } from '../actions';
+import { setToken } from '../../../../App/actions';
+
+
+jest.mock('utils/request', () => ({
+  request: (url, options) => {
+    if(options.userPassword === "bad_password") throw Error("Could not log in.")
+    return {
+      token: 'token'
+    }
+  },
+  getRequestOptions: (type, payload) => payload
+}));
 
 const initialState = {
   login: fromJS({
@@ -45,11 +58,30 @@ describe('<LoginPage />', () => {
     expect(rendered.getByText(/Log In/i)).toBeTruthy();
   });
   
-  it('should dispatch login action', () => {
+  it('should disable button without input', () => {
     const button = rendered.getByText(/Log In/i);
     fireEvent(button, 'press');
     const actions = store.getActions();
-    expect(actions[0].type).toEqual('LOGIN');
+    expect(actions).toHaveLength(0)
+  });
+
+  it('should dispatch login action, then loginSuccess', () => {
+    fireEvent.changeText(rendered.getByPlaceholderText(/Email/i), "email@email.com");
+    fireEvent.changeText(rendered.getByPlaceholderText(/Password/i), "password");
+    fireEvent.press(rendered.getByText(/Log In/i));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual(logIn("email@email.com", "password"));
+    expect(actions[1]).toEqual(setToken('token'));
+    expect(actions[2]).toEqual(logInSuccess());
+  });
+
+  it('should dispatch login action, then loginFailure', () => {
+    fireEvent.changeText(rendered.getByPlaceholderText(/Email/i), "email@email.com");
+    fireEvent.changeText(rendered.getByPlaceholderText(/Password/i), "bad_password");
+    fireEvent.press(rendered.getByText(/Log In/i));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual(logIn("email@email.com", "bad_password"));
+    expect(actions[1]).toEqual(logInFailure("Could not log in."));
   });
 
   it('should render error message', () => {

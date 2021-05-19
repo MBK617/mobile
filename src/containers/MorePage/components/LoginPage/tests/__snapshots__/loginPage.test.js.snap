@@ -62,7 +62,11 @@ exports[`<LoginPage /> should render correctly 1`] = `
   </Text>
   <View
     accessibilityRole="button"
-    accessibilityState={Object {}}
+    accessibilityState={
+      Object {
+        "disabled": true,
+      }
+    }
     accessible={true}
     focusable={true}
     onClick={[Function]}
@@ -82,10 +86,12 @@ exports[`<LoginPage /> should render correctly 1`] = `
       style={
         Array [
           Object {},
+          Object {},
         ]
       }
     >
       <Text
+        disabled={true}
         style={
           Array [
             Object {
@@ -93,6 +99,9 @@ exports[`<LoginPage /> should render correctly 1`] = `
               "fontSize": 18,
               "margin": 8,
               "textAlign": "center",
+            },
+            Object {
+              "color": "#cdcdcd",
             },
           ]
         }

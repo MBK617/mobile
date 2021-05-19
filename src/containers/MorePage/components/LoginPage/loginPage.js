@@ -31,7 +31,11 @@ const Login = () => {
       <Input value={email} onChangeText={setEmail} placeholder="Email"/>
       <Input value={password} onChangeText={setPassword} placeholder="Password"/>
       <Text style={styles.error}>{errorMessage}</Text>
-      <Button title="Log In" onPress={()=>dispatch(logIn(email, password))}/>
+      <Button 
+        title="Log In" 
+        onPress={()=>dispatch(logIn(email, password))}
+        disabled={!email || !password}
+      />
     </View>
   );
 }

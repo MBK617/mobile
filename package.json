@@ -7,7 +7,8 @@
     "web": "expo start --web",
     "start": "expo start",
     "docs": "jsdoc -c jsdoc.json -R README.md",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -34,7 +35,7 @@
     "react-native-reanimated": "~2.1.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.0.0",
-    "react-native-web": "~0.13.12",
+    "react-native-web": "^0.16.3",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-mock-store": "^1.5.4",
@@ -48,12 +49,6 @@
     "jest": "^26.6.3",
     "jest-expo": "^41.0.0",
     "react-test-renderer": "~17.0.2"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper|expo-constants|@unimodules)|expo-secure-store|@expo/)"
-    ]
   },
   "private": true
 }

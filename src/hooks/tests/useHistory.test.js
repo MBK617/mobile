@@ -36,6 +36,15 @@ describe('useHistory hook', () => {
     expect(mockDispatch).toHaveBeenCalledWith(pushHistory('test'))
   });
 
+  it('should dispatch pushHistory action with relative path on goTo', () => {
+    const {
+      goTo
+    } = useHistory();
+
+    goTo('./test');
+    expect(mockDispatch).toHaveBeenCalledWith(pushHistory('home/test'))
+  });
+
   it('should dispatch popHistory action on goBack', () => {
     const {
       goBack

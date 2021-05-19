@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react-native';
+import { render, cleanup, fireEvent } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import createSagaMiddleware from 'redux-saga';
 import { fromJS } from 'immutable';
+
+import { setToken } from 'containers/App/actions';
 
 import ProfilePage from '..';
 
@@ -34,5 +36,11 @@ describe('<ProfilePage />', () => {
   it('should render correctly', () => {
     const tree = rendered.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it('log out button should dispatch log out action', () => {
+    fireEvent.press(rendered.getByText(/Log Out/i));
+    const actions = store.getActions();
+    expect(actions[0]).toEqual(setToken(null));
   });
 });

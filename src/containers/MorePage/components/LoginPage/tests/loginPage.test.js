@@ -5,9 +5,10 @@ import { render, cleanup, fireEvent } from '@testing-library/react-native';
 import { fromJS } from 'immutable';
 import createSagaMiddleware from 'redux-saga';
 
-import LoginPage from '..';
+import { setToken } from 'containers/App/actions';
 import { logIn, logInFailure, logInSuccess } from '../actions';
-import { setToken } from '../../../../App/actions';
+
+import LoginPage from '..';
 
 
 jest.mock('utils/request', () => ({

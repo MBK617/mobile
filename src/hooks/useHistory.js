@@ -19,7 +19,7 @@ const useHistory = () => {
   const goTo = (value) => {
     let newPath = value;
     if(newPath.substr(0, 2) === './') {
-      newPath = `${path}/${newPath}`
+      newPath = `${path}/${newPath.substring(2)}`
     }
     if(path !== newPath) {
       dispatch(pushHistory(newPath));

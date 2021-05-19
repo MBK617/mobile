@@ -189,7 +189,7 @@ exports[`<App /> events should render without crashing 1`] = `
           }
         }
         accessible={true}
-        focusable={true}
+        focusable={false}
         hitSlop={
           Object {
             "bottom": 6,
@@ -1399,7 +1399,7 @@ exports[`<App /> inbox should render without crashing 1`] = `
           }
         }
         accessible={true}
-        focusable={true}
+        focusable={false}
         hitSlop={
           Object {
             "bottom": 6,
@@ -2609,7 +2609,7 @@ exports[`<App /> more should render without crashing 1`] = `
           }
         }
         accessible={true}
-        focusable={true}
+        focusable={false}
         hitSlop={
           Object {
             "bottom": 6,
@@ -4085,7 +4085,7 @@ exports[`<App /> when logged in to home page should render without crashing 1`] 
           }
         }
         accessible={true}
-        focusable={true}
+        focusable={false}
         hitSlop={
           Object {
             "bottom": 6,

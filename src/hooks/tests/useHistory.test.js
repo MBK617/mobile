@@ -1,56 +1,104 @@
 import { useMemo } from 'react';
+import reactRedux from 'react-redux';
+
 import { popHistory, pushHistory } from 'containers/App/actions';
 import useHistory from '../useHistory'
 
-const mockDispatch = jest.fn();
-jest.mock('react-redux', () =>( {
-  useSelector: () => ({ history: ['home', 'more'] }),
-  useDispatch: () => mockDispatch
-}));
+
+jest.mock('react-redux', () => jest.fn());
 
 jest.mock('react');
 useMemo.mockImplementation((func) => func());
 
 describe('useHistory hook', () => {
+  let mockDispatch = jest.fn();
+  beforeEach(() => {
+    mockDispatch = jest.fn();
+    reactRedux.useDispatch = () => mockDispatch;
+  })
 
-  it('should return object with correct fields', () => {
-    const {
-      history,
-      path,
-      goTo,
-      goBack
-    } = useHistory();
+  describe('normal history', () => {
+    beforeEach(() => {
+      reactRedux.useSelector = () => ({ history: ['home', 'more'] })
+    });
 
-    expect(history).toBeInstanceOf(Array);
-    expect(typeof path).toBe('string');
-    expect(goTo).toBeInstanceOf(Function);
-    expect(goBack).toBeInstanceOf(Function);
+    it('should return object with correct fields', () => {
+      const {
+        history,
+        path,
+        goTo,
+        goBack
+      } = useHistory();
+  
+      expect(history).toBeInstanceOf(Array);
+      expect(typeof path).toBe('string');
+      expect(goTo).toBeInstanceOf(Function);
+      expect(goBack).toBeInstanceOf(Function);
+    });
+  
+    it('should dispatch pushHistory action on goTo', () => {
+      const {
+        goTo
+      } = useHistory();
+  
+      goTo('test');
+      expect(mockDispatch).toHaveBeenCalledWith(pushHistory('test'))
+    });
+  
+    it('should dispatch pushHistory action with relative path on goTo', () => {
+      const {
+        goTo
+      } = useHistory();
+  
+      goTo('./test');
+      expect(mockDispatch).toHaveBeenCalledWith(pushHistory('home/test'))
+    });
+  
+    it('should not dispatch pushHistory action if navigating to current path', () => {
+      const {
+        goTo
+      } = useHistory();
+  
+      goTo('home');
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
+  
+    it('should dispatch popHistory action on goBack', () => {
+      const {
+        goBack
+      } = useHistory();
+  
+      goBack();
+      expect(mockDispatch).toHaveBeenCalledWith(popHistory())
+    });
   });
 
-  it('should dispatch pushHistory action on goTo', () => {
-    const {
-      goTo
-    } = useHistory();
 
-    goTo('test');
-    expect(mockDispatch).toHaveBeenCalledWith(pushHistory('test'))
+  describe('empty history', () => {
+    beforeEach(() => {
+      reactRedux.useSelector = () => ({ history: [] })
+    });
+
+    it('should not error and should have empty string for path', () => {
+      const {
+        path
+      } = useHistory();
+      expect(path).toBe('')
+    });
   });
 
-  it('should dispatch pushHistory action with relative path on goTo', () => {
-    const {
-      goTo
-    } = useHistory();
+  describe('history length 1', () => {
+    beforeEach(() => {
+      reactRedux.useSelector = () => ({ history: ['home'] })
+    });
 
-    goTo('./test');
-    expect(mockDispatch).toHaveBeenCalledWith(pushHistory('home/test'))
+    it('should not dispatch popHistory action on goBack', () => {
+      const {
+        goBack
+      } = useHistory();
+      goBack();
+      expect(mockDispatch).not.toHaveBeenCalled();
+    });
   });
 
-  it('should dispatch popHistory action on goBack', () => {
-    const {
-      goBack
-    } = useHistory();
-
-    goBack();
-    expect(mockDispatch).toHaveBeenCalledWith(popHistory())
-  });
 });

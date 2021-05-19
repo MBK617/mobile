@@ -1,10 +1,9 @@
-
-jest.mock('react-redux');    
-
 import { useEffect } from 'react';
-import useLoginStatus from '../useLoginStatus';
-import { getToken } from 'containers/App/actions';
 import reactRedux from 'react-redux';
+
+import { getToken } from 'containers/App/actions';
+
+import useLoginStatus from '../useLoginStatus';
 
 jest.mock('react');
 useEffect.mockImplementation((func) => func());

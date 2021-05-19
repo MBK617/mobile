@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
-import { getToken } from 'containers/App/actions';
 
-const selectApp = createSelector(
-  state => state.app,
-  substate => substate.toJS()
-);
+import { getToken } from 'containers/App/actions';
+import { selectApp } from 'containers/App/selectors';
 
 const useLoginStatus = () => {
   const { token } = useSelector(selectApp);

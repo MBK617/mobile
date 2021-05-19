@@ -83,8 +83,7 @@ const App = () => {
           source={require('assets/mbklogo.jpg')} 
           style={styles.logo}
         />
-        <Appbar.Action 
-          onPress={() => {}}
+        <Appbar.Action
           icon="bell" 
           accessibilityLabel="Notifications"
         />

@@ -1,12 +1,7 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from 'reselect';
 import { popHistory, pushHistory } from 'containers/App/actions';
-
-const selectApp = createSelector(
-  state => state.app,
-  substate => substate.toJS()
-);
+import { selectApp } from 'containers/App/selectors';
 
 const useHistory = () => {
   const { history } = useSelector(selectApp);

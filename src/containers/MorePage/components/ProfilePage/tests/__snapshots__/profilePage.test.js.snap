@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProfilePage /> should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "#fff",
+      "flex": 1,
+      "flexShrink": 0,
+      "justifyContent": "center",
+      "minWidth": 250,
+      "padding": 10,
+      "width": "100%",
+    }
+  }
+>
+  <Text>
+    You are logged in!
+  </Text>
+  <Image
+    source={
+      Object {
+        "uri": "https://i.redd.it/tonbtar3mb741.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 200,
+        "margin": 10,
+      }
+    }
+  />
+  <View
+    accessibilityRole="button"
+    accessibilityState={Object {}}
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#007AFF",
+              "fontSize": 18,
+              "margin": 8,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Log Out
+      </Text>
+    </View>
+  </View>
+</View>
+`;

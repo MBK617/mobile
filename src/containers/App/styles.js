@@ -1,18 +1,24 @@
 import { StyleSheet } from 'react-native'
+import Constants from 'expo-constants'
 
 const styles = StyleSheet.create({
   root: {
+    marginTop: Constants.statusBarHeight,
     alignSelf: 'center',
     flexShrink: 0,
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    padding: 10,
-    minWidth: 250,
+    width: '100%',
   },
-  image: {
-    height: 200,
-    margin: 10
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between', 
+    backgroundColor: '#fff'
+  },
+  logo: {
+    width: 120,
+    height: 25,
   }
 });
 

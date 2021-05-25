@@ -1,4 +1,5 @@
 # MBK617 - mobile
+[![Maintainability](https://api.codeclimate.com/v1/badges/db380ebbe6b4304e1c1b/maintainability)](https://codeclimate.com/github/MBK617/mobile/maintainability)
 ## Requirements for Development
 * Node.js LTS release or greater
 * Expo CLI
